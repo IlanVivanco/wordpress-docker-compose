@@ -4,8 +4,8 @@
 .Rhistory
 .RData
 .DS_Store
-wordpress/*
-!wordpress/.keep
+wp/*
+!wp/.keep
 mysql/*
 !mysql/.keep
 logs/nginx/*
