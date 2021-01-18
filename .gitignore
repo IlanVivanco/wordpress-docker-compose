@@ -1,6 +1,6 @@
 wp/*
-!wp/.keep
+!wp/.gitkeep
 mysql/*
-!mysql/.keep
+!mysql/.gitkeep
 logs/nginx/*
-!logs/nginx/.keep
+!logs/nginx/.gitkeep
