@@ -17,7 +17,7 @@ autoinstall: start
 
 clean: down
 	@echo "💥 Removing related folders/files..."
-	@rm -rf  mysql/* wp/*
+	@rm -rf  mysql/* wp/* content/themes/* content/plugins/* content/uploads content/upgrade
 
 reset: clean
 
