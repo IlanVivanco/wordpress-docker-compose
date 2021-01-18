@@ -5,13 +5,10 @@ source <(grep -v '^#' .env)
 
 function fetch_theme() {
    echo "🎨 Fetching starter theme..."
-   # git clone git@github.com:nt-matter/ntm-theme.git ${WORDPRESS_THEME_DIR}
+   git clone git@github.com:nt-matter/ntm-theme.git ${WORDPRESS_THEME_DIR}
 
+   echo "⚙ Building theme..."
    # ${WORDPRESS_THEME_DIR}/bin/setup.sh
-   # cd ${WORDPRESS_THEME_DIR}
-   # npm install
-   # composer install
-   # gulp build
 
    echo "✔ Theme is now ready!"
 }
