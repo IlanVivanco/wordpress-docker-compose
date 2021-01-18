@@ -1,6 +1,2 @@
-wp/*
-!wp/.gitkeep
-mysql/*
-!mysql/.gitkeep
-logs/nginx/*
-!logs/nginx/.gitkeep
+themes/*
+!themes/.gitkeep
