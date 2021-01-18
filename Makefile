@@ -1,23 +1,22 @@
 start:
 	docker-compose up -d --build
 
-healthcheck:
-	docker-compose run --rm healthcheck
-
-down:
+stop:
 	docker-compose down
 
-install: start healthcheck
+# healthcheck:
+# 	docker-compose run --rm healthcheck
+
+install: start #healthcheck
 
 configure:
 	docker-compose -f docker-compose.yml -f wp-auto-config.yml run --rm wp-auto-config
 
-autoinstall: start
-	docker-compose -f docker-compose.yml -f wp-auto-config.yml run --rm wp-auto-config
+autoinstall: start configure
 
-clean: down
+clean: stop
 	@echo "💥 Removing related folders/files..."
-	@rm -rf  mysql/* wp/* content/themes/* content/plugins/* content/uploads content/upgrade
+	@rm -rf  mysql/* wp/*
 
 reset: clean
 
