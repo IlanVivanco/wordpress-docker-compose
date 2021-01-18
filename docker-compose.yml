@@ -7,18 +7,21 @@ services:
     volumes:
       - ./config/php.conf.ini:/usr/local/etc/php/conf.d/php.ini
       - ${WORDPRESS_DATA_DIR:-./wordpress}:/var/www/html
+      - ./content/plugins/:/var/www/html/wp-content/plugins/
+      - ./content/themes/:/var/www/html/wp-content/themes/
     environment:
       - WORDPRESS_DB_NAME=${COMPOSE_PROJECT_NAME:-wordpress}
       - WORDPRESS_TABLE_PREFIX=${WORDPRESS_TABLE_PREFIX:-wp_}
       - WORDPRESS_DB_HOST=${WORDPRESS_DB_HOST:-mysql}
       - WORDPRESS_DB_USER=${DATABASE_USER:-root}
       - WORDPRESS_DB_PASSWORD=${DATABASE_PASSWORD:-password}
+      - APACHE_RUN_USER="#33"
     depends_on:
       - mysql
       - phpmyadmin
     restart: always
     ports:
-        - 80:80
+        - ${HTTP_PORT:-80}:80
 
   mysql:
     image: mariadb:${MARIADB_VERSION:-latest}
@@ -31,6 +34,8 @@ services:
       - MYSQL_PASSWORD=${DATABASE_PASSWORD:-password}
       - MYSQL_DATABASE=${COMPOSE_PROJECT_NAME:-wordpress}
     restart: always
+    ports:
+        - ${MYSQL_PORT:-3306}:3306
 
   phpmyadmin:
     depends_on:
@@ -39,7 +44,7 @@ services:
     container_name: ${COMPOSE_PROJECT_NAME}_phpmyadmin
     restart: always
     ports:
-      - ${PHPMYADMIN_PORT}:80
+      - ${PHPMYADMIN_PORT}:8080
     environment:
       PMA_HOST: mysql
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-password}
